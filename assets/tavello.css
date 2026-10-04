@@ -1,0 +1,15 @@
+html { scroll-behavior: smooth; }
+body { min-width: 320px; }
+.tavello-main {
+  display: grid;
+  min-height: calc(100vh - 4rem);
+  place-items: center;
+  padding: 2rem 1.5rem;
+}
+.tavello-message {
+  color: hsl(var(--foreground));
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
