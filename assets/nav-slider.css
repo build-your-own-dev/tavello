@@ -1,0 +1,248 @@
+.byo-sliding-nav {
+  position: relative;
+  --slider-opacity: 0;
+}
+.byo-brand-mark {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  align-items: center;
+  justify-content: center;
+}
+.byo-brand-symbol {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.byo-brand-name {
+  display: flex;
+  align-items: center;
+  height: 1.25rem;
+}
+.byo-brand-wordmark {
+  display: block;
+  width: auto;
+  height: .72rem;
+  max-width: 9.5rem;
+  object-fit: contain;
+}
+.byo-sliding-nav::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  height: 2px;
+  width: var(--slider-width, 0px);
+  border-radius: 999px;
+  background: var(--foreground);
+  opacity: var(--slider-opacity);
+  transform: translateX(var(--slider-x, 0px));
+  pointer-events: none;
+  transition: transform 320ms cubic-bezier(.22, 1, .36, 1), width 320ms cubic-bezier(.22, 1, .36, 1), opacity 160ms ease;
+}
+.byo-sliding-nav > a {
+  background-color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .byo-sliding-nav::after { transition: none; }
+}
+
+.byo-device-showcase {
+  --showcase-progress: 0;
+  position: relative;
+  height: 125vh;
+  margin-top: 1.5rem;
+}
+.byo-device-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+.byo-device-visual {
+  width: min(96vw, 100rem);
+  transform: scale(calc(.98 + var(--showcase-progress) * .04));
+  transform-origin: center center;
+  will-change: transform;
+}
+.byo-device-visual > * {
+  margin-top: 0 !important;
+}
+.byo-device-image {
+  max-height: 88vh;
+  object-fit: contain !important;
+  filter: none;
+}
+.byo-device-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #fff;
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 2px 28px rgba(0,0,0,.34);
+}
+.byo-after-device {
+  position: relative;
+  z-index: 3;
+  margin-top: -58vh !important;
+}
+.byo-device-kicker,
+.byo-device-line {
+  margin: 0;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.byo-device-kicker {
+  margin-bottom: 1rem;
+  font-size: clamp(.72rem, 1vw, .9rem);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: clamp(0, calc((var(--showcase-progress) - .01) * 10), 1);
+  transform: translateY(calc((.1 - var(--showcase-progress)) * 70px));
+}
+.byo-device-line {
+  max-width: 14ch;
+  font-size: clamp(2.25rem, 6vw, 6.5rem);
+  font-weight: 650;
+  line-height: .98;
+  letter-spacing: -.055em;
+}
+.byo-device-line-one {
+  opacity: clamp(0, calc((var(--showcase-progress) - .03) * 10), calc((.55 - var(--showcase-progress)) * 8));
+  transform: translateY(calc((.2 - var(--showcase-progress)) * 120px));
+}
+.byo-device-line-two {
+  position: absolute;
+  opacity: clamp(0, calc((var(--showcase-progress) - .46) * 9), calc((1.04 - var(--showcase-progress)) * 8));
+  transform: translateY(calc((.62 - var(--showcase-progress)) * 120px));
+}
+
+@media (max-width: 700px) {
+  .byo-brand-name { display: none; }
+  .byo-device-showcase {
+    height: auto;
+    min-height: 0;
+    margin-top: 1rem;
+  }
+  .byo-device-sticky {
+    position: relative;
+    top: auto;
+    display: block;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .byo-device-visual {
+    width: 100%;
+    transform: none;
+  }
+  .byo-device-image {
+    display: block;
+    width: 100%;
+    max-height: none;
+  }
+  .byo-device-line { font-size: clamp(2.2rem, 11vw, 4rem); }
+  .byo-after-device { margin-top: 0 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .byo-device-showcase { height: auto; min-height: 0; }
+  .byo-device-sticky { position: relative; height: auto; min-height: 0; overflow: visible; }
+  .byo-device-visual { transform: none; }
+  .byo-device-image { filter: none; }
+  .byo-device-copy { display: none; }
+  .byo-after-device { margin-top: 0 !important; }
+}
+
+
+/* Mobile menu and icon transitions */
+.byo-mobile-menu-panel {
+  position: relative;
+  z-index: 40;
+  transform-origin: top center;
+  overflow: hidden;
+  animation: byo-menu-open 300ms cubic-bezier(.22, 1, .36, 1) both;
+}
+.byo-mobile-menu-panel nav > * {
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: byo-menu-item-in 260ms cubic-bezier(.22, 1, .36, 1) forwards;
+}
+.byo-mobile-menu-panel nav > *:nth-child(2) { animation-delay: 35ms; }
+.byo-mobile-menu-panel nav > *:nth-child(3) { animation-delay: 70ms; }
+.byo-mobile-menu-panel nav > *:nth-child(4) { animation-delay: 105ms; }
+.byo-mobile-menu-panel.byo-mobile-menu-closing {
+  pointer-events: none;
+  animation: byo-menu-close 240ms cubic-bezier(.55, 0, 1, .45) both;
+}
+.byo-mobile-menu-panel.byo-mobile-menu-closing nav > * {
+  animation: byo-menu-item-out 150ms ease forwards;
+}
+.byo-mobile-menu-toggle {
+  position: relative;
+  transition: background-color 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+.byo-mobile-menu-toggle:active { transform: scale(.92); }
+.byo-mobile-menu-toggle svg {
+  transform-origin: center;
+  animation: byo-menu-icon-open 300ms cubic-bezier(.22, 1, .36, 1) both;
+}
+.byo-mobile-menu-toggle[aria-expanded="false"] svg {
+  animation-name: byo-menu-icon-close;
+}
+.byo-mobile-menu-toggle-closing svg {
+  animation: byo-menu-icon-out 220ms ease both !important;
+}
+@keyframes byo-menu-open {
+  from { opacity: 0; max-height: 0; transform: translateY(-10px) scaleY(.94); }
+  to { opacity: 1; max-height: 24rem; transform: translateY(0) scaleY(1); }
+}
+@keyframes byo-menu-close {
+  from { opacity: 1; max-height: 24rem; transform: translateY(0) scaleY(1); }
+  to { opacity: 0; max-height: 0; transform: translateY(-10px) scaleY(.96); }
+}
+@keyframes byo-menu-item-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes byo-menu-item-out {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes byo-menu-icon-open {
+  from { opacity: 0; transform: rotate(-90deg) scale(.65); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+@keyframes byo-menu-icon-close {
+  from { opacity: 0; transform: rotate(90deg) scale(.65); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+@keyframes byo-menu-icon-out {
+  to { opacity: 0; transform: rotate(90deg) scale(.65); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .byo-mobile-menu-panel,
+  .byo-mobile-menu-panel nav > *,
+  .byo-mobile-menu-toggle svg {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+}
+
+
+/* Four-column desktop footer; stacked on smaller screens. */
+@media (min-width: 768px) {
+  .byo-footer-grid {
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  }
+}
