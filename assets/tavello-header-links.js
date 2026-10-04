@@ -22,6 +22,7 @@
 
   function syncNav(nav) {
     if (!nav) return;
+    nav.querySelectorAll('a[href*="instagram.com"]').forEach(link => link.remove());
     const start = Array.from(nav.querySelectorAll(':scope > a')).find(link => link.textContent.trim() === 'Start');
     const work = Array.from(nav.querySelectorAll(':scope > a')).find(link => link.textContent.trim() === 'Arbeiten');
     setHref(start, BYO + '/#/');
